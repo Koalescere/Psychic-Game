@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Psychic-Game</title>
+    <!-- Added link to the jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" 
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" 
+    crossorigin="anonymous"></script>
+    <!-- Added a link to Bootstrap-->
+    <!-- <link rel="stylesheet" href="assets/css/reset.css"> imbedded in bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    
+    <!-- link to our external stylesheet-->
+    <!-- <link rel="stylesheet" href="assets/css/reset.css">  -->
+
+</head>
+<body>
+    <div id="game">
+        <p><strong><h1>Psychic Game</h1></strong></p>
+    </div>
+
+    <div>
+       <p id="directions-text">
+       <h3>Guess what letter I'm thinking of...</h3>
+    </p> 
+        <p id="userChosen-Letter"></p>
+        <p id="computerChosen-Letter"></p>
+        <p id="Wins-Count"></p>
+        <p id="Losses-Count"></p>
+        <p id="Chances-Count"></p>
+        <p id="GuessesLeft-Count"></p>
+        <p id="Your-Guesses-so-far"></p>
+    </div>
+
+    <script type="text/javascript">
+
+//computer random selection options    
+    var computerChoices = "abcdefghijklmnopqrstuvwxyz".split("");
+
+//variables used for track scoring    
+    var Wins = 0;
+    var Losses = 0;
+    var Chances = 0; 
+    var GuessesLeft= 9;
+    var GuessesMade = [];
+
+//Assignment of onkeyup event, computer selection, wins & Losses to variables
+    var directionstext = document.getElementById ("directions-text");
+    var userChosenLetter = document.getElementById ("userChosen-Letter");
+    var computerChosenLetter = document.getElementById ("computerChosen-Letter");
+    var WinsCount = document.getElementById ("Wins-Count");
+    var LossesCount = document.getElementById ("Losses-Count");
+    var ChancesCount = document.getElementById ("Chances-Count");
+    var GuessesLeftCount = document.getElementById ("GuessesLeft-Count");
+    var YourGuesses = document.getElementById ("Your-Guesses-so-far");
+
+
+ //function run whenever user presses a key
+    document.onkeyup = function (event){
+        
+        //Computer random selection
+        var computerGuess = computerChoices[Math.floor(Math.random()*computerChoices.length)];
+        //console.log (computerGuess);
+
+       //Capturing and assigning of onkey event drop to lowercase
+        var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+            GuessesMade += this.value;
+        console.log (userGuess);
+
+        
+
+            if (GuessesLeft > 0) {if (userGuess != computerGuess) {
+                GuessesLeft--;
+                Chances++;}
+                
+
+                if (GuessesLeft > 0); {if (userGuess == computerGuess) {
+                GuessesLeft--;
+                Wins++;
+    
+        if (GuessesLeft === "0") {
+            Losses++;
+            }
+ }
+        else {   
+        
+        }
+      
+    //Display the computer guess, user guess, wins, loss, how many guesses left.
+    //computerChosenLetter.textContent = "The computer chose: " + computerGuess;
+    //userChosenLetter.textContent = "You chose: " + userGuess;
+    WinsCount.textContent = "Wins: " + Wins; 
+    LossesCount.textContent = "Losses: " + Losses; 
+    ChancesCount.textContent = "Chances:  " + Chances;
+    GuessesLeftCount.textContent = "Your Guesses Left: " + GuessesLeft;
+    YourGuesses.textContent = "Your-Guesses-so-far: " + GuessesMade;  
+    //document.querySelector('#Losses-Count').innerHTML = 'Losses: ' + Losses;
+    //document.querySelector('#Wins-Count').innerHTML = 'Wins: ' + Wins;
+
+
+    }
+
+    }
+};
+    </script>
+    
+</body>
+</html>
